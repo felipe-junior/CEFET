@@ -1,20 +1,20 @@
 from io import SEEK_SET
 import struct
 import os
-
+import intercala
 caminho = "cep.dat"
 size_file = os.stat(caminho).st_size
 
 registroCEP = struct.Struct("72s72s72s72s2s8s2s")
 tamanhoDaLinha = registroCEP.size
 numeroDelinhas = size_file // registroCEP.size 
-numeroDivisoes = int(input("Numero de divisoes: "))
+numeroDivisoes = int(input("Numero de divisoes que deseja: "))
 qtdLinhaPorDivisao = numeroDelinhas // numeroDivisoes 
-
+versao = 0
 with open(caminho,"rb") as f: #lendo arquivo
-    for divisaoAtual in range(0, numeroDivisoes):
+    for divisaoAtual in range(1, numeroDivisoes+1):
         listaTemp= []
-        f.seek(divisaoAtual * qtdLinhaPorDivisao * tamanhoDaLinha, SEEK_SET) #faz o deslocamento do ponteiro do arquivo para a divisao pertinente
+        f.seek((divisaoAtual-1) * qtdLinhaPorDivisao * tamanhoDaLinha, SEEK_SET) #faz o deslocamento do ponteiro do arquivo para a divisao pertinente
         line = f.readline(tamanhoDaLinha)
         
         i = 1
@@ -25,14 +25,8 @@ with open(caminho,"rb") as f: #lendo arquivo
             i += 1
         
         listaTemp.sort(key=lambda e: e[5]) #ordena o arquivo gerado
-        with open("cep_ordenado{}.dat".format(divisaoAtual),"wb") as file:
+        with open("parte_ordenada{}_{}.dat".format(versao, divisaoAtual),"wb") as file:
             for endereco in listaTemp: 
                 file.write(registroCEP.pack(*endereco))
 
-
-
-# lista.sort(key=lambda e: e[5])
-
-# with open("cep_ordenado.dat","wb") as f:
-#     for endereco in lista:
-#         f.write(registroCEP.pack(*endereco))
+intercala.juntaArquivo(numeroDivisoes, versao)

@@ -2,15 +2,13 @@ import math
 import struct
 
 registroCEP = struct.Struct("72s72s72s72s2s8s2s")  # CEP É P 8s
-qtdDeArquivos = 8
-print(math.ceil(math.log2(16)))
 
 
-def intercala(arquivo1, arquivo2, versionIntercala):
+def _intercala(arquivo1, arquivo2, versionIntercala, file_id):
 
     with open(arquivo1, "rb") as f1, open(arquivo2, "rb") as f2:
 
-        file_gerado = open("intercala{}.dat".format(versionIntercala), "wb")
+        file_gerado = open("parte_ordenada{}_{}.dat".format(versionIntercala, file_id), "wb")
         line1 = f1.read(registroCEP.size)
         line2 = f2.read(registroCEP.size)
         
@@ -38,22 +36,18 @@ def intercala(arquivo1, arquivo2, versionIntercala):
             line2 = f2.read(registroCEP.size)
         file_gerado.close()
 
-i = 1
-# while (qtdDeArquivos!=1): 
-j = 1
-flag = 0
-qtdDeArquivos = 2
-while(i< qtdDeArquivos):
-
-    if(flag ==0):
-        intercala("intercala{}.dat".format(i), "intercala{}.dat".format(i+1),j)
-    else: 
-        intercala("cep_ordenado{}.dat".format(i), "cep_ordenado{}.dat".format(i+1),j)
-    i+=2
-    j += 1
-
-
-qtdDeArquivos= qtdDeArquivos//2
-i=0
-
-[7,4,5,0,1,2,3]
+def juntaArquivo(qtdDeArquivos, versao):
+    while(qtdDeArquivos!=1 ):
+        limit = qtdDeArquivos
+        print(limit)
+        divisaoAtual = 1
+        j = 1
+        while(divisaoAtual <= limit):
+            caminhoArquivo1 ="parte_ordenada{}_{}.dat".format(versao, divisaoAtual) 
+            caminhoArquivo2 = "parte_ordenada{}_{}.dat".format(versao, divisaoAtual+1)
+            print(caminhoArquivo1 + " -- "+ caminhoArquivo2)
+            _intercala(caminhoArquivo1, caminhoArquivo2,versao+1, j)
+            divisaoAtual+=2
+            j+=1
+        versao += 1
+        qtdDeArquivos /= 2 #Divide ao meio o numero de arquivos a ser iterado
