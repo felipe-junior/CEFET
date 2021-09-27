@@ -8,7 +8,7 @@ ordena-os e gera as partes ordenadas. Depois chama o módulo ```intercalaPartes.
 intercalações das partes lendo as linhas das partes, escolhendo a linha que possui o menor cep e inserindo essa nova linha no novo arquivo ``cep_ordenado.dat``. 
 Faz esssas operações até nao sobrar nenhuma linha a ser comparada.
 
-A variável ``caminho`` pode ser alterada para no arquivo dos ceps
+A variável ``caminho`` pode ser alterada no arquivo dos ceps
 
 Funciona com qualquer numero de divisoes.
 Executar em program.py
