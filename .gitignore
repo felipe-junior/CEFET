@@ -3,3 +3,5 @@
 *.dat
 /.vscode
 src/Trabalho3/__pycache__
+src/Trabalho3/PrimeiraVersao/__pycache__
+src/Trabalho3/SegundaVersao/__pycache__
