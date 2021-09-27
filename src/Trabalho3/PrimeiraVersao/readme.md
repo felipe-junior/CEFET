@@ -5,5 +5,6 @@
 O ```particionaOrdena.py``` divide os arquivos em n divisoes advindas do input do usuário, ordena-os e gera as partes ordenados. Depois chama o módulo ```intercala.py``` para fazer as intercalações das partes uma por uma até não sobrar nenhuma.
 
 A variável ``caminho`` pode ser alterada para o arquivo dos ceps
+
 Executar em program.py
 
