@@ -6,3 +6,5 @@ O ```particionaOrdena.py``` divide os arquivos em n divisoes advindas do input d
 
 A variável ``caminho`` pode ser alterada para o arquivo dos ceps
 
+Executar em program.py
+
