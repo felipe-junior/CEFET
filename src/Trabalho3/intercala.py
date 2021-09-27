@@ -39,13 +39,11 @@ def _intercala(arquivo1, arquivo2, versionIntercala, file_id):
 def juntaArquivo(qtdDeArquivos, versao):
     while(qtdDeArquivos!=1 ):
         limit = qtdDeArquivos
-        print(limit)
         divisaoAtual = 1
         j = 1
         while(divisaoAtual <= limit):
             caminhoArquivo1 ="parte_ordenada{}_{}.dat".format(versao, divisaoAtual) 
             caminhoArquivo2 = "parte_ordenada{}_{}.dat".format(versao, divisaoAtual+1)
-            print(caminhoArquivo1 + " -- "+ caminhoArquivo2)
             _intercala(caminhoArquivo1, caminhoArquivo2,versao+1, j)
             divisaoAtual+=2
             j+=1

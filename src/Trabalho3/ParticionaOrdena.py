@@ -2,6 +2,24 @@ from io import SEEK_SET
 import struct
 import os
 import intercala
+import time
+from datetime import timedelta
+
+import struct
+
+def start_time_measure(message=None):
+    if message:
+        print(message)
+    return time.monotonic()
+
+def end_time_measure(start_time, print_prefix=None):
+    end_time = time.monotonic()
+    if print_prefix:
+        delta = str(timedelta(seconds=end_time - start_time))
+        print(print_prefix + delta)
+    return delta
+####Ignonar codigo acima-> está ai para medir o tempo de execução
+
 caminho = "cep.dat"
 size_file = os.stat(caminho).st_size
 
@@ -29,4 +47,7 @@ with open(caminho,"rb") as f: #lendo arquivo
             for endereco in listaTemp: 
                 file.write(registroCEP.pack(*endereco))
 
+
+tempoInicial = start_time_measure("Começou a intercalar")
 intercala.juntaArquivo(numeroDivisoes, versao)
+tempoGasto = end_time_measure(tempoInicial, "Terminou em:")
